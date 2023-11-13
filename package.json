@@ -1,0 +1,45 @@
+{
+	"name": "@synion/business-model-canvas-component",
+	"version": "0.0.1",
+	"description": "Webcomponent to display a business model canvas.",
+	"keywords": [
+		"business model canvas",
+		"webcomponent",
+		"html5"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/biz-dev-ops/business-model-canvas-component"
+	},
+	"author": "Arjan Geertsema",
+	"license": "Apache 2.0",
+	"bugs": {
+		"url": "https://github.com/biz-dev-ops/business-model-canvas-component/issues"
+	},
+	"homepage": "https://github.com/biz-dev-ops/business-model-canvas-component/blob/main/README.md",
+	"type": "module",
+	"main": "dist/business-model-canvas-component.js",
+	"module": "dist/business-model-canvas-component.js",
+	"files": [
+		"dist/"
+	],
+	"scripts": {
+		"develop": "webpack-dev-server --mode development",
+		"build": "webpack --mode production",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"html-webpack-plugin": "^5.5.3",
+		"lit": "^2.7.5"
+	},
+	"devDependencies": {
+		"@webcomponents/webcomponentsjs": "^2.8.0",
+		"copy-webpack-plugin": "^11.0.0",
+		"minify-html-literals-loader": "^1.1.1",
+		"ts-loader": "^9.4.4",
+		"typescript": "^5.1.6",
+		"webpack": "^5.88.1",
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "^4.15.1"
+	}
+}
