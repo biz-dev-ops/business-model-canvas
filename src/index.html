@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Business model canvas</title>
+  <link rel="stylesheet" href="assets/style/page/style.css">
+</head>
+
+<body>
+  <main>
+    <div class="content">
+      <div class="header-container h2">
+        <div class="header">
+          <h2 id="h2" tabindex="-1">Business model canvas <a class="header-anchor" href="#h2">¶</a></h2>
+        </div>
+        <div class="container">
+          <business-model-canvas id="business-model-canvas" />
+        </div>
+      </div>
+  </main>
+  
+  <script>
+
+    const component = document.getElementById('business-model-canvas');
+
+    setTimeout(() => {
+      component.model = {
+        keyPartnerships: [ "test", "test2"],
+        keyActivities: null,
+        keyResources: null,
+        valuePropositions: null,
+        customerRelationships: null,
+        channels: null,
+        customerSegments: null,
+        costStructure: null,
+        revenueStreams: null
+      };
+    }, 3000);
+  </script>
+</body>
+
+</html>
