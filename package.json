@@ -1,6 +1,6 @@
 {
 	"name": "@biz-dev-ops/business-model-canvas-component",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Webcomponent to display a business model canvas.",
 	"keywords": [
 		"business model canvas",
