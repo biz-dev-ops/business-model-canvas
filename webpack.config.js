@@ -9,13 +9,14 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const config = {
     entry: './src/business-model-canvas.ts',
     module: {
-        rules: [
-            {
-                test: /\.ts?$/,
-                use: ['ts-loader', 'minify-html-literals-loader'],
-                exclude: /node_modules/,
-            }
-        ]
+        rules: [{
+            test: /\.ts?$/,
+            use: ['ts-loader', 'minify-html-literals-loader'],
+            exclude: /node_modules/,
+        }, {
+            test: /\.svg$/,
+            loader: 'svg-inline-loader'
+        }]
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
@@ -23,7 +24,7 @@ const config = {
     output: {
         filename: 'business-model-canvas.js',
         path: path.resolve(__dirname, './dist')
-    },    
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'

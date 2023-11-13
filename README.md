@@ -32,7 +32,15 @@ The business model canvas model, must be set via JavaScript.
 
 <script>
     document.getElementById('business-model-canvas').model = {
-    	...
+    	keyPartnerships: [ "..." ],
+        keyActivities: [ "..." ],
+        keyResources: [ "..." ],
+        valuePropositions: [ "..." ],
+        customerRelationships: [ "..." ],
+        channels: [ "..." ],
+        customerSegments: [ "..." ],
+        costStructure: [ "..." ],
+        revenueStreams: [ "..." ]
     }
 <script>
 ```
