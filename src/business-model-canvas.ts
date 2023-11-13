@@ -248,8 +248,8 @@ export class BusinessReferenceComponent extends LitElement {
   }
 
   costStructureTemplate(): TemplateResult {
-    if (this.model?.channels) {
-      return html`${this.model.channels.map(item => html`<p>${item}</p>`)}`;
+    if (this.model?.costStructure) {
+      return html`${this.model.costStructure.map(item => html`<p>${item}</p>`)}`;
     }
     else {
       return html`
@@ -263,8 +263,8 @@ export class BusinessReferenceComponent extends LitElement {
   }
 
   revenueStreamsTemplate(): TemplateResult {
-    if (this.model?.channels) {
-      return html`${this.model.channels.map(item => html`<p>${item}</p>`)}`;
+    if (this.model?.revenueStreams) {
+      return html`${this.model.revenueStreams.map(item => html`<p>${item}</p>`)}`;
     }
     else {
       return html`
