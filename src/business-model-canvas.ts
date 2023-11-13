@@ -1,8 +1,19 @@
 import { html, css, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import resetStyles from './modules/styles/reset';
 import { Model } from './modules/models/model';
+
+// Icons from https://www.svgrepo.com/collection/solar-linear-icons/
+const chair = require ('./assets/icons/chair.svg');
+const checkSquare = require ('./assets/icons/check-square.svg');
+const gift = require ('./assets/icons/gift.svg');
+const heart = require ('./assets/icons/heart.svg');
+const link = require ('./assets/icons/link.svg');
+const moneyBag = require ('./assets/icons/money-bag.svg');
+const tag = require ('./assets/icons/tag.svg');
+const tram = require ('./assets/icons/tram.svg');
+const users = require ('./assets/icons/users.svg');
 
 @customElement('business-model-canvas')
 export class BusinessReferenceComponent extends LitElement {
@@ -12,15 +23,29 @@ export class BusinessReferenceComponent extends LitElement {
   @property({ attribute: "model-json" })
   modelJson!: string
 
+  icons: any = {
+    chair: chair,
+    checkSquare: checkSquare,
+    gift: gift,
+    heart: heart,
+    link: link,
+    moneyBag: moneyBag,
+    tag: tag,
+    tram: tram, 
+    users: users
+  }
+
   override render() {
     return html`  
-    <table cellspacing="0" border="1">
+    <table cellspacing="0">
       <tr>
-        <th class="key-partnerships" colspan="2">Key Partnerships</th>
-        <th class="key-activities" colspan="2">Key Activities</th>
-        <th class="value-propositions" colspan="2">Value Propositions</th>
-        <th class="customer-relationships" colspan="2"">Customer Relationships</th>
-        <th class="customer-segments" colspan="2">Customer Segments</th>
+        <th class="key-partnerships" colspan="2">
+          ${this.blockTitleTemplate('Key Partnerships', this.icons.link)}
+        </th>
+        <th class="key-activities" colspan="2">${this.blockTitleTemplate('Key Activities', this.icons.checkSquare)}</th>
+        <th class="value-propositions" colspan="2">${this.blockTitleTemplate('Value Propositions', this.icons.gift)}</th>
+        <th class="customer-relationships" colspan="2"">${this.blockTitleTemplate('Customer Relationships', this.icons.heart)}</th>
+        <th class="customer-segments" colspan="2">${this.blockTitleTemplate('Customer Segments', this.icons.users)}</th>
       <tr>
       <tr>
         <td colspan="2" rowspan="3">
@@ -40,8 +65,8 @@ export class BusinessReferenceComponent extends LitElement {
         </td>
       </tr>
       <tr>
-        <th class="key-resources" colspan="2">Key Resources</th>
-        <th class="channels" colspan="2">Channels</th>
+        <th class="key-resources" colspan="2">${this.blockTitleTemplate('Key Resources', this.icons.chair)}</th>
+        <th class="channels" colspan="2">${this.blockTitleTemplate('Channels', this.icons.tram)}</th>
       </tr>
       <tr>
         <td colspan="2">
@@ -53,8 +78,8 @@ export class BusinessReferenceComponent extends LitElement {
       </tr>
       <tr>
       </tr>
-        <th class="cost-structure" colspan="5">Cost Structure</th>
-        <th class="revenue-streams" colspan="5">Revenue Streams</th>
+        <th class="cost-structure" colspan="5">${this.blockTitleTemplate('Cost Structure', this.icons.moneyBag)}</th>
+        <th class="revenue-streams" colspan="5">${this.blockTitleTemplate('Revenue Streams', this.icons.tag)}</th>
       </tr>
       <tr>
         <td colspan="5">
@@ -74,7 +99,15 @@ export class BusinessReferenceComponent extends LitElement {
 
     super.update(changedProperties);
   }
-  
+
+  blockTitleTemplate(title: string, icon: string): TemplateResult {
+    return html`
+      <span class="block-title" title="${icon}">
+          ${title}
+          ${unsafeHTML(icon)}
+      </span>
+    `;
+  }
 
   keyPartnershipsTemplate() : TemplateResult {
     if (this.model?.keyPartnerships) {
@@ -245,7 +278,7 @@ export class BusinessReferenceComponent extends LitElement {
 
   static override get styles() {
     const styles = css`
-    body {font-family: 'Headland One', serif;}
+    :root {font-family: 'Headland One', serif;}
 
     table {
       border: none;
@@ -261,6 +294,15 @@ export class BusinessReferenceComponent extends LitElement {
       font-weight: 700;
       font-size: 1em;
       text-align: left;
+      padding: var(--space-xs);
+    }
+
+    th svg {
+      inline-size: var(--space-md);
+      block-size: var(--space-md);
+      aspect-ratio: 1;
+      display: inline-flex;
+      align-self: end;
     }
 
     td {
@@ -269,12 +311,17 @@ export class BusinessReferenceComponent extends LitElement {
       vertical-align: top;
       height: 200px;
       width: 200px;
-      padding: 6px;
+      padding: var(--space-xs);
     }
 
     p,li {
       font-weight: 300;
       font-size: 0.8em;
+    }
+
+    .block-title {
+      display: flex;
+      justify-content: space-between;
     }
     `;
 
