@@ -1,1 +1,1 @@
-# business-model-canvas
+# business-model-canvas-component
