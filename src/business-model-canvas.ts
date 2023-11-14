@@ -16,7 +16,7 @@ const tram = require('./assets/icons/tram.svg');
 const users = require('./assets/icons/users.svg');
 
 @customElement('business-model-canvas')
-export class BusinessReferenceComponent extends LitElement {
+export class BusinessModelCanvasComponent extends LitElement {
   @property()
   model!: Model
 
