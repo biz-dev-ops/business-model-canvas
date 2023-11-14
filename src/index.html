@@ -26,7 +26,22 @@
 
     setTimeout(() => {
       component.model = {
-        keyPartnerships: [ "test", "test2"],
+        keyPartnerships: [ 
+          "test 1", 
+          "test 2", {
+            text: "test 4"
+          },  { 
+            head: "head"
+          }, [
+             "item 1", 
+             "item 2"
+          ], {
+            items: [
+              "item 1", 
+              "item 2"
+            ]
+          }
+        ],
         keyActivities: null,
         keyResources: null,
         valuePropositions: null,
