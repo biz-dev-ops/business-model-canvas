@@ -2,18 +2,18 @@ import { html, css, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import resetStyles from './modules/styles/reset';
-import { Model } from './modules/models/model';
+import { Collection, Head, Model, ModelItem, Text } from './modules/models/model';
 
 // Icons from https://www.svgrepo.com/collection/solar-linear-icons/
-const chair = require ('./assets/icons/chair.svg');
-const checkSquare = require ('./assets/icons/check-square.svg');
-const gift = require ('./assets/icons/gift.svg');
-const heart = require ('./assets/icons/heart.svg');
-const link = require ('./assets/icons/link.svg');
-const moneyBag = require ('./assets/icons/money-bag.svg');
-const tag = require ('./assets/icons/tag.svg');
-const tram = require ('./assets/icons/tram.svg');
-const users = require ('./assets/icons/users.svg');
+const chair = require('./assets/icons/chair.svg');
+const checkSquare = require('./assets/icons/check-square.svg');
+const gift = require('./assets/icons/gift.svg');
+const heart = require('./assets/icons/heart.svg');
+const link = require('./assets/icons/link.svg');
+const moneyBag = require('./assets/icons/money-bag.svg');
+const tag = require('./assets/icons/tag.svg');
+const tram = require('./assets/icons/tram.svg');
+const users = require('./assets/icons/users.svg');
 
 @customElement('business-model-canvas')
 export class BusinessReferenceComponent extends LitElement {
@@ -31,7 +31,7 @@ export class BusinessReferenceComponent extends LitElement {
     link: link,
     moneyBag: moneyBag,
     tag: tag,
-    tram: tram, 
+    tram: tram,
     users: users
   }
 
@@ -109,9 +109,29 @@ export class BusinessReferenceComponent extends LitElement {
     `;
   }
 
-  keyPartnershipsTemplate() : TemplateResult {
+  collectionTemplate(collection: ModelItem[]): TemplateResult | TemplateResult[] {
+    return collection.map(item => {
+      if((item as Collection).items) {
+        return html`<ul>${(item as Collection).items.map(i => html`<li>${i}</li>`)}</ul>`;
+      }
+      else if (Array.isArray(item)) {
+        return html`<ul>${item.map(i => html`<li>${i}</li>`)}</ul>`;
+      }
+      else if((item as Text).text){
+        return html`<p>${(item as Text).text}</p>`;
+      }
+      else if((item as Head).head){
+        return html`<h1>${(item as Head).head}</h1>`;
+      }
+      else {
+        return html`<p>${item}</p>`;
+      }
+    });
+  }
+
+  keyPartnershipsTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.keyPartnerships) {
-      return html`${this.model.keyPartnerships.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.keyPartnerships);
     }
     else {
       return html`
@@ -127,9 +147,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  keyActivitiesTemplate(): TemplateResult {
+  keyActivitiesTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.keyActivities) {
-      return html`${this.model.keyActivities.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.keyActivities);
     }
     else {
       return html`
@@ -146,9 +166,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  valuePropositionsTemplate(): TemplateResult {
+  valuePropositionsTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.valuePropositions) {
-      return html`${this.model.valuePropositions.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.valuePropositions);
     }
     else {
       return html`
@@ -173,9 +193,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  customerRelationshipTemplate(): TemplateResult {
+  customerRelationshipTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.customerRelationships) {
-      return html`${this.model.customerRelationships.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.customerRelationships);
     }
     else {
       return html`
@@ -194,9 +214,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  customerSegmentsTemplate(): TemplateResult {
+  customerSegmentsTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.customerSegments) {
-      return html`${this.model.customerSegments.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.customerSegments);
     }
     else {
       return html`
@@ -213,9 +233,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  keyResourcesTemplate(): TemplateResult {
+  keyResourcesTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.keyResources) {
-      return html`${this.model.keyResources.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.keyResources);
     }
     else {
       return html`
@@ -232,9 +252,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  channelsTemplate(): TemplateResult {
+  channelsTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.channels) {
-      return html`${this.model.channels.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.channels);
     }
     else {
       return html`
@@ -247,9 +267,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  costStructureTemplate(): TemplateResult {
+  costStructureTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.costStructure) {
-      return html`${this.model.costStructure.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.costStructure);
     }
     else {
       return html`
@@ -262,9 +282,9 @@ export class BusinessReferenceComponent extends LitElement {
     }
   }
 
-  revenueStreamsTemplate(): TemplateResult {
+  revenueStreamsTemplate(): TemplateResult | TemplateResult[] {
     if (this.model?.revenueStreams) {
-      return html`${this.model.revenueStreams.map(item => html`<p>${item}</p>`)}`;
+      return this.collectionTemplate(this.model.revenueStreams);
     }
     else {
       return html`
@@ -314,9 +334,13 @@ export class BusinessReferenceComponent extends LitElement {
       padding: var(--space-xs);
     }
 
-    p,li {
+    p,li,h1 {
       font-weight: 300;
       font-size: 0.8em;
+    }
+
+    h1 {
+      font-weight: 600;
     }
 
     .block-title {
